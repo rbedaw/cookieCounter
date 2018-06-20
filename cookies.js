@@ -22,26 +22,35 @@ class App extends React.Component {
         <AddRemoveCookie
           numCookies={numCookies}
           onCookieUpdate={this.handleCookieUpdate} />
+        <Timer />
       </div>
     );
   }
 }
 class Timer extends React.Component{
-  constructor(){
-    
+  constructor(props){
+    super(props);
+    this.state={
+      time:new Date()
+    }
   }
   
   componentDidMount(){
-    
+    this.timerID = setInterval(() => this.tick(), 1000);
   }
   componentWillUnmount(){
-    
+    clearInterval(this.timerID);
   }
+  
   tick(){
-    
+    this.setState({
+      time: new Date()
+    })
   }
   render(){
-    
+    return(
+      <h2>{this.state.time.toLocaleTimeString()}</h2>
+    )
   }
 }
 
